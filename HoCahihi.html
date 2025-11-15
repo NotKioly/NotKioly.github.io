@@ -3,151 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài tập Hồ Cá - 6.1.1</title>
+    <title>Hồ Cá hihi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --swim-speed: 15s; /* Tốc độ mặc định */
+        }
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #333;
             margin: 0;
-            font-family: sans-serif;
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh;
+            /* Background mặc định */
+            background-image: url('https://images.unsplash.com/photo-1582967788606-a171f1080ca8?q=80&w=1920'); 
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
         }
 
-        /* Khung hồ cá */
-        .aquarium {
-            width: 800px;
-            height: 500px;
-            background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); /* Màu nước biển */
-            border: 10px solid #555;
+        /* --- BẢNG ĐIỀU KHIỂN --- */
+        .control-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
             border-radius: 15px;
-            position: relative;
-            overflow: hidden; /* Để cá bơi ra khỏi khung không bị lòi ra ngoài */
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            width: 250px;
+            backdrop-filter: blur(5px);
         }
 
-        /* Mặt nước */
-        .water-surface {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            z-index: 10;
-        }
+        .control-panel h3 { margin: 0 0 15px 0; color: #333; text-align: center; }
+        
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
 
-        /* Cát đáy biển */
-        .sand {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background: #edc9af;
-            z-index: 5;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+        /* Nút chọn background */
+        .bg-btn-group { display: flex; gap: 5px; }
+        .bg-btn {
+            flex: 1;
+            padding: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background: #eee;
+            border-radius: 5px;
+            font-size: 12px;
         }
+        .bg-btn:hover { background: #ddd; }
 
-        /* Định nghĩa con cá chung */
+        /* Select nhạc */
+        select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+
+        /* Thanh trượt tốc độ */
+        input[type="range"] { width: 100%; }
+
+        /* Trình phát nhạc */
+        audio { width: 100%; margin-top: 10px; height: 30px; }
+
+        /* --- HỒ CÁ --- */
         .fish {
             position: absolute;
-            font-size: 50px; /* Kích thước cá */
-            user-select: none;
+            font-size: 60px;
             cursor: pointer;
-            transition: transform 0.2s;
+            user-select: none;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+            transition: transform 0.3s;
         }
         
-        .fish:hover {
-            transform: scale(1.2); /* Phóng to khi di chuột vào */
+        .fish:hover { transform: scale(1.3) !important; }
+
+        /* Hiệu ứng bơi */
+        @keyframes swim-left {
+            from { left: -150px; transform: scaleX(1); }
+            to { left: 110%; transform: scaleX(1); }
+        }
+        @keyframes swim-right {
+            from { right: -150px; transform: scaleX(-1); }
+            to { right: 110%; transform: scaleX(-1); }
         }
 
-        /* Hiệu ứng bơi từ trái qua phải */
-        @keyframes swim-left-to-right {
-            from { left: -100px; }
-            to { left: 100%; }
-        }
-
-        /* Hiệu ứng bơi từ phải qua trái */
-        @keyframes swim-right-to-left {
-            from { right: -100px; }
-            to { right: 100%; }
-        }
-
-        /* Hiệu ứng bong bóng bay lên */
-        @keyframes bubble-rise {
-            0% { bottom: 0; opacity: 0; transform: translateX(0); }
-            50% { opacity: 1; }
-            100% { bottom: 100%; opacity: 0; transform: translateX(-20px); }
-        }
-
-        /* --- CÁC CON CÁ CỤ THỂ --- */
-        
-        /* Cá 1: Bơi nhanh, ở trên cao */
-        .fish-1 {
-            top: 100px;
-            animation: swim-left-to-right 10s linear infinite;
-        }
-
-        /* Cá 2: Bơi chậm, ở giữa, ngược chiều */
-        .fish-2 {
-            top: 250px;
-            transform: scaleX(-1); /* Lật ngược icon cá cho đúng hướng */
-            animation: swim-right-to-left 15s linear infinite;
-        }
-
-        /* Cá 3: Bơi rất chậm, sát đáy */
-        .fish-3 {
-            top: 380px;
-            font-size: 70px;
-            animation: swim-left-to-right 20s linear infinite;
-        }
+        .f1 { top: 20%; animation: swim-left var(--swim-speed) linear infinite; }
+        .f2 { top: 50%; animation: swim-right calc(var(--swim-speed) * 1.2) linear infinite; }
+        .f3 { top: 70%; animation: swim-left calc(var(--swim-speed) * 0.8) linear infinite; }
+        .f4 { top: 35%; left: 50%; animation: swim-right calc(var(--swim-speed) * 1.5) linear infinite; font-size: 40px; }
 
         /* Bong bóng */
         .bubble {
             position: absolute;
+            bottom: -20px;
             background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
-            bottom: 0;
-            animation: bubble-rise 4s ease-in infinite;
-            z-index: 4;
+            animation: rise 5s infinite ease-in;
         }
-
-        .b1 { width: 20px; height: 20px; left: 20%; animation-duration: 5s; }
-        .b2 { width: 10px; height: 10px; left: 50%; animation-duration: 7s; }
-        .b3 { width: 15px; height: 15px; left: 80%; animation-duration: 6s; }
-
-        h1 {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 4px #000;
-            z-index: 20;
-            margin-top: 20px;
+        @keyframes rise {
+            0% { bottom: -20px; transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { bottom: 100%; transform: translateX(-20px); opacity: 0; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="aquarium">
-        <h1>Hồ Cá Của A (Bài 6.1.1)</h1>
-        <div class="water-surface"></div>
+    <div class="control-panel">
+        <h3>🐠 Bể Cá Chill</h3>
 
-        <div class="fish fish-1">🐠</div>
+        <div class="control-group">
+            <label>🎵 Chọn nhạc:</label>
+            <select id="musicSelect" onchange="changeMusic()">
+                <option value="">-- Tắt nhạc --</option>
+                <option value="anhvui.mp3">Anh vui (Duzme Remix)</option>
+                <option value="blue.mp3">Blue - Yung Kai</option>
+                <option value="cupid.mp3">Cupid</option>
+                <option value="phepmau.mp3">Phép màu</option>
+                <option value="tuongtu.mp3">Tương tư - Clow</option>
+            </select>
+            <audio id="audioPlayer" controls loop></audio>
+        </div>
 
-        <div class="fish fish-2">🐡</div>
+        <div class="control-group">
+            <label>🖼️ Đổi phông nền:</label>
+            <div class="bg-btn-group">
+                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1582967788606-a171f1080ca8?q=80&w=1920')">Biển Xanh</button>
+                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1920')">San Hô</button>
+                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1920')">Đêm Trăng</button>
+            </div>
+        </div>
 
-        <div class="fish fish-3">🐟</div>
-
-        <div class="bubble b1"></div>
-        <div class="bubble b2"></div>
-        <div class="bubble b3"></div>
-
-        <div class="sand"></div>
+        <div class="control-group">
+            <label>🚀 Tốc độ bơi:</label>
+            <input type="range" min="2" max="30" value="15" oninput="changeSpeed(this.value)">
+            <div style="font-size: 12px; color: #666; margin-top: 5px;">(Kéo trái: Nhanh | Kéo phải: Chậm)</div>
+        </div>
     </div>
 
+    <div class="fish f1">🐠</div>
+    <div class="fish f2">🐡</div>
+    <div class="fish f3">🦈</div>
+    <div class="fish f4">🐟</div>
+
+    <div id="bubbles-container"></div>
+
+    <script>
+        // Hàm đổi Background
+        function changeBg(url) {
+            document.body.style.backgroundImage = `url('${url}')`;
+        }
+
+        // Hàm đổi tốc độ cá
+        function changeSpeed(val) {
+            // Giá trị càng nhỏ thì bơi càng nhanh
+            // Đảo ngược logic một chút cho thanh trượt dễ hiểu (kéo lên là nhanh)
+            let speed = 32 - val; 
+            document.documentElement.style.setProperty('--swim-speed', speed + 's');
+        }
+
+        // Hàm đổi nhạc
+        function changeMusic() {
+            var select = document.getElementById('musicSelect');
+            var audio = document.getElementById('audioPlayer');
+            var song = select.value;
+
+            if (song) {
+                audio.src = song;
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Tự động tạo bong bóng
+        function createBubbles() {
+            const container = document.getElementById('bubbles-container');
+            for (let i = 0; i < 10; i++) {
+                let b = document.createElement('div');
+                b.className = 'bubble';
+                b.style.left = Math.random() * 100 + '%';
+                b.style.width = Math.random() * 15 + 5 + 'px';
+                b.style.height = b.style.width;
+                b.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                b.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(b);
+            }
+        }
+        createBubbles();
+    </script>
 </body>
 </html>
