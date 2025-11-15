@@ -89,11 +89,9 @@
             transition: 0.2s;
         }
 
-        /* Màu nút Play (Xanh lá) */
         .play-btn { background: #2ecc71; }
         .play-btn:hover { background: #27ae60; }
 
-        /* Màu nút Pause (Đỏ) */
         .pause-btn { background: #ff6b6b; }
         .pause-btn:hover { background: #ff5252; }
 
@@ -132,15 +130,19 @@
         <h3>🐠 Hồ Cá Chill</h3>
 
         <div class="control-group">
-            <label>🎵 List nhạc:</label>
+            <label>🎵 List nhạc tuyển chọn:</label>
             <select id="musicSelect" onchange="playMusic(this.value)">
                 <option value="">-- Chọn nhạc --</option>
+                <option value="LspZCNNP6aE">Một Đêm Say - Thịnh Suy</option>
+                <option value="KwtqAydBcFo">Chuyện Rằng - An Vũ</option>
+                <option value="lRsaDQtYqAo">Tràn Bộ Nhớ - Dương Domic</option>
+                <option value="KKc_RMln5UY">Lối Nhỏ - Đen Vâu</option>
                 <option value="wt0k2Dn_4oE">Anh vui - Phạm Kỳ</option>
                 <option value="98zHKN-xSHk">Blue - Yung Kai</option>
                 <option value="rpC1PohpbaQ">Cupid - Fifty Fifty</option>
                 <option value="jPjQJYKhhk4">Phép màu - Nguyễn Hùng</option>
                 <option value="Ss56EcAp8JU">Tương tư - Clow</option>
-                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau</option>
+                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng</option>
             </select>
             
             <div class="music-controls">
@@ -202,7 +204,7 @@
             container.appendChild(b);
         }
 
-        // 2. XỬ LÝ NHẠC (Riêng biệt)
+        // 2. XỬ LÝ NHẠC
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
@@ -216,13 +218,8 @@
 
         function onPlayerStateChange(event) { if (event.data === YT.PlayerState.ENDED) { player.playVideo(); } }
 
-        // Chọn bài mới
         function playMusic(videoId) { if (player && videoId) { player.loadVideoById(videoId); } }
-
-        // Tạm dừng
         function pauseMusic() { if (player && typeof player.pauseVideo === 'function') { player.pauseVideo(); } }
-
-        // Tiếp tục
         function resumeMusic() { if (player && typeof player.playVideo === 'function') { player.playVideo(); } }
     </script>
 </body>
