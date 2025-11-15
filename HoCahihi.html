@@ -40,7 +40,6 @@
         .control-group { margin-bottom: 15px; }
         .control-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
 
-        /* Nút background */
         .bg-btn-group { display: flex; gap: 5px; margin-bottom: 10px;}
         .bg-btn {
             flex: 1; padding: 5px; cursor: pointer;
@@ -49,43 +48,66 @@
         }
         .bg-btn:hover { background: #ddd; }
 
-        /* Select nhạc */
         select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
-
-        /* Thanh trượt tốc độ */
         input[type="range"] { width: 100%; cursor: pointer; }
 
-        /* Ẩn Player YouTube đi cho đẹp */
         #youtube-player {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            visibility: hidden;
+            position: absolute; top: -9999px; left: -9999px; visibility: hidden;
         }
 
-        /* --- HỒ CÁ --- */
+        /* --- CẤU HÌNH CÁ (IMAGE) --- */
         .fish {
             position: absolute;
-            font-size: 60px;
             user-select: none;
-            /* Đã tắt cursor pointer và hover effect */
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+            /* Bỏ bóng đổ cho ảnh PNG nhìn tự nhiên hơn */
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+            /* Mặc định độ rộng, sẽ chỉnh riêng từng con */
+            width: 100px; 
+            height: auto;
         }
 
         /* Hiệu ứng bơi */
         @keyframes swim-left {
-            from { left: -150px; transform: scaleX(1); }
+            from { left: -300px; transform: scaleX(1); }
             to { left: 110%; transform: scaleX(1); }
         }
         @keyframes swim-right {
-            from { right: -150px; transform: scaleX(-1); }
+            from { right: -300px; transform: scaleX(-1); }
             to { right: 110%; transform: scaleX(-1); }
         }
 
-        .f1 { top: 20%; animation: swim-left var(--swim-speed) linear infinite; }
-        .f2 { top: 50%; animation: swim-right calc(var(--swim-speed) * 1.2) linear infinite; }
-        .f3 { top: 70%; animation: swim-left calc(var(--swim-speed) * 0.8) linear infinite; }
-        .f4 { top: 35%; left: 50%; animation: swim-right calc(var(--swim-speed) * 1.5) linear infinite; font-size: 40px; }
+        /* --- VỊ TRÍ VÀ TỐC ĐỘ TỪNG CON --- */
+        
+        /* Con 1: Cá vàng PNG */
+        .f1 { top: 10%; width: 120px; animation: swim-left var(--swim-speed) linear infinite; }
+        
+        /* Con 2: Cá hoạt hình (Pinterest) */
+        .f2 { top: 30%; width: 80px; animation: swim-right calc(var(--swim-speed) * 1.2) linear infinite; }
+        
+        /* Con 3: Cá tươi */
+        .f3 { top: 80%; width: 90px; animation: swim-left calc(var(--swim-speed) * 1.5) linear infinite; }
+        
+        /* Con 4: Cá vàng nhỏ */
+        .f4 { top: 40%; width: 70px; animation: swim-right calc(var(--swim-speed) * 0.9) linear infinite; }
+        
+        /* Con 5: Squidward (Mực) */
+        .f5 { top: 60%; width: 110px; animation: swim-left calc(var(--swim-speed) * 1.1) linear infinite; }
+        
+        /* Con 6: Cá voi (Whale) - Bơi chậm, to */
+        .f6 { top: 20%; width: 250px; animation: swim-right calc(var(--swim-speed) * 2.0) linear infinite; z-index: 1;}
+        
+        /* Con 7: Patrick (Sao biển) */
+        .f7 { top: 75%; width: 100px; animation: swim-left calc(var(--swim-speed) * 1.3) linear infinite; }
+        
+        /* Con 8: Plankton */
+        .f8 { top: 90%; width: 50px; animation: swim-right calc(var(--swim-speed) * 0.8) linear infinite; }
+        
+        /* Con 9: Spongebob & Patrick */
+        .f9 { top: 50%; width: 150px; animation: swim-left calc(var(--swim-speed) * 1.4) linear infinite; }
+        
+        /* Con 10: Spongebob Logo */
+        .f10 { top: 15%; width: 130px; animation: swim-right calc(var(--swim-speed) * 1.6) linear infinite; }
+
 
         /* Bong bóng */
         .bubble {
@@ -106,7 +128,7 @@
 <body>
 
     <div class="control-panel">
-        <h3>🐠 Hồ Cá Chill & Nhạc</h3>
+        <h3>🐠 Hồ Cá Chill</h3>
 
         <div class="control-group">
             <label>🎵 List nhạc tuyển chọn:</label>
@@ -117,7 +139,7 @@
                 <option value="rpC1PohpbaQ">Cupid - Fifty Fifty</option>
                 <option value="jPjQJYKhhk4">Phép màu - Nguyễn Hùng</option>
                 <option value="Ss56EcAp8JU">Tương tư - Clow</option>
-                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng em ti pi</option>
+                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng MTP</option>
             </select>
             <div style="font-size: 11px; color: #666; margin-top: 5px; font-style: italic;">
                 *Nhạc lấy trực tiếp từ YouTube
@@ -127,9 +149,9 @@
         <div class="control-group">
             <label>🖼️ Đổi không gian:</label>
             <div class="bg-btn-group">
-                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1582967788606-a171f1080ca8?q=80&w=1920')">Biển Xanh</button>
-                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1920')">San Hô</button>
-                <button class="bg-btn" onclick="changeBg('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1920')">Đêm Trăng</button>
+                <button class="bg-btn" onclick="changeBg('https://sl.bing.net/fVrTfo4ssdo')">Spongebob</button>
+                <button class="bg-btn" onclick="changeBg('https://sl.bing.net/eIsu4jpKrHo')">Ocean</button>
+                <button class="bg-btn" onclick="changeBg('https://sl.bing.net/gHIUTVNMJt6')">Minecraft</button>
             </div>
         </div>
 
@@ -141,10 +163,16 @@
 
     <div id="youtube-player"></div>
 
-    <div class="fish f1">🐠</div>
-    <div class="fish f2">🐡</div>
-    <div class="fish f3">🦈</div>
-    <div class="fish f4">🐟</div>
+    <img src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHg5NDIxMzctaW1hZ2Utcm01MDMtbDBqOXFxMnQucG5n.png" class="fish f1">
+    <img src="https://i.pinimg.com/736x/54/8b/92/548b925e17aeb1e13c37a608ab66f007.jpg" class="fish f2">
+    <img src="https://img.freepik.com/premium-psd/fresh-fish-png-transparent-background_679658-51867.jpg" class="fish f3">
+    <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9zdGF0aWMvZmlsZXMvd2Vic2l0ZS8yMDIyLTA1L3drNzkwNjcyMTYtaW1hZ2Utam9iODQ5LnBuZw.png" class="fish f4">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.1Ju5z0JwGd9_24nOld-wpwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="fish f5">
+    <img src="https://static.vecteezy.com/system/resources/previews/046/353/581/non_2x/whale-isolated-on-transparent-background-png.png" class="fish f6">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.s95L4QXM5Zvyvl3pTrjlvAHaEv?rs=1&pid=ImgDetMain&o=7&rm=3" class="fish f7">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.q-LDDQGcBMR1cWKSduz41wHaFn?rs=1&pid=ImgDetMain&o=7&rm=3" class="fish f8">
+    <img src="https://www.clipartmax.com/png/middle/236-2363459_spongebob-squarepants-spongebob-characters-transparent-background.png" class="fish f9">
+    <img src="https://www.freepnglogos.com/uploads/spongebob-png/cartoon-characters-spongebob-squarepants-png-6.png" class="fish f10">
 
     <div id="bubbles-container"></div>
 
@@ -153,21 +181,12 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: '', // Chưa phát bài nào
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1 // Lặp lại
-                },
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
+                height: '0', width: '0', videoId: '',
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1 },
+                events: { 'onStateChange': onPlayerStateChange }
             });
         }
 
-        // Tải API của YouTube về
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -175,36 +194,27 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
-                player.playVideo(); // Hết bài thì phát lại
+                player.playVideo();
             }
         }
 
-        // Hàm phát nhạc khi chọn bài
         function playMusic(videoId) {
-            if (videoId) {
-                player.loadVideoById(videoId);
-            } else {
-                player.stopVideo();
-            }
+            if (videoId) { player.loadVideoById(videoId); } else { player.stopVideo(); }
         }
 
         // --- 2. CÁC CHỨC NĂNG KHÁC ---
-        
-        // Đổi background
         function changeBg(url) {
             document.body.style.backgroundImage = `url('${url}')`;
         }
 
-        // Đổi tốc độ
         function changeSpeed(val) {
             let speed = 32 - val; 
             document.documentElement.style.setProperty('--swim-speed', speed + 's');
         }
 
-        // Tạo bong bóng
         function createBubbles() {
             const container = document.getElementById('bubbles-container');
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) { // Tăng số lượng bong bóng lên cho đẹp
                 let b = document.createElement('div');
                 b.className = 'bubble';
                 b.style.left = Math.random() * 100 + '%';
