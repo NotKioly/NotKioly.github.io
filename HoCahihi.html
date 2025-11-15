@@ -21,22 +21,19 @@
             transition: background-image 0.5s ease-in-out;
         }
 
+        /* --- NÚT ẨN/HIỆN MENU --- */
         .toggle-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 20px; right: 20px;
             z-index: 200;
-            width: 40px;
-            height: 40px;
+            width: 45px; height: 45px;
             background: white;
-            border: none;
+            border: 2px solid #ddd;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 22px;
+            display: flex; justify-content: center; align-items: center;
             transition: 0.3s;
         }
         .toggle-btn:hover { background: #f0f0f0; transform: scale(1.1); }
@@ -45,73 +42,68 @@
         .control-panel {
             position: absolute;
             top: 20px;
-            right: 70px;
-            background: rgba(255, 255, 255, 0.9);
+            right: 80px; /* Né nút toggle ra */
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             z-index: 100;
-            width: 280px;
-            backdrop-filter: blur(5px);
+            width: 260px;
+            backdrop-filter: blur(10px);
             
-            /* Hiệu ứng trượt */
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s;
-            transform-origin: top right;
+            /* Hiệu ứng trượt mượt mà */
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            transform: translateX(0);
+            opacity: 1;
         }
 
-        /* Class để ẩn menu */
+        /* Class ẩn menu */
         .control-panel.hidden {
-            transform: translateX(400px) scale(0.8); /* Trượt ra ngoài và thu nhỏ */
+            transform: translateX(400px); /* Trượt hẳn ra ngoài */
             opacity: 0;
-            pointer-events: none; /* Không bấm được khi ẩn */
+            pointer-events: none; /* Không bấm nhầm khi ẩn */
         }
 
-        .control-panel h3 { margin: 0 0 15px 0; color: #333; text-align: center; }
-        
+        .control-panel h3 { margin: 0 0 15px 0; color: #333; text-align: center; font-size: 18px; }
         .control-group { margin-bottom: 15px; }
-        .control-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        .control-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; color: #555; }
 
+        /* Nút nền */
         .bg-btn-group { display: flex; gap: 5px; margin-bottom: 10px;}
         .bg-btn {
-            flex: 1; padding: 5px; cursor: pointer;
-            border: 1px solid #ccc; background: #eee;
-            border-radius: 5px; font-size: 11px;
+            flex: 1; padding: 6px; cursor: pointer;
+            border: 1px solid #ccc; background: #f9f9f9;
+            border-radius: 5px; font-size: 11px; font-weight: 600;
         }
-        .bg-btn:hover { background: #ddd; }
+        .bg-btn:hover { background: #e0e0e0; }
 
+        /* Nút Pause */
         .pause-btn {
-            width: 100%;
-            margin-top: 5px;
-            padding: 8px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
+            width: 100%; margin-top: 8px; padding: 8px;
+            background: #ff6b6b; color: white;
+            border: none; border-radius: 5px;
+            cursor: pointer; font-weight: bold; font-size: 12px;
             transition: 0.2s;
         }
         .pause-btn:hover { background: #ff5252; }
 
-        select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
-        input[type="range"] { width: 100%; cursor: pointer; }
+        select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; font-size: 13px; }
+        input[type="range"] { width: 100%; cursor: pointer; margin-top: 5px; }
 
-        #youtube-player { position: absolute; top: -9999px; left: -9999px; visibility: hidden; }
+        #youtube-player { position: absolute; top: -9999px; visibility: hidden; }
 
         /* --- CẤU HÌNH CÁ --- */
         .fish {
-            position: absolute;
-            user-select: none;
+            position: absolute; user-select: none;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
-            height: auto;
-            display: block; 
+            height: auto; display: block; 
         }
 
         @keyframes swim-left { from { left: -300px; transform: scaleX(1); } to { left: 110%; transform: scaleX(1); } }
         @keyframes swim-right { from { right: -300px; transform: scaleX(-1); } to { right: 110%; transform: scaleX(-1); } }
-        @keyframes float-up-down { 0%, 100% { margin-top: 0; } 50% { margin-top: -40px; } }
+        @keyframes float-up-down { 0%, 100% { margin-top: 0; } 50% { margin-top: -30px; } }
 
-        /* --- CẤU HÌNH TỪNG CON --- */
+        /* --- LIST CÁ --- */
         .f1 { top: 10%; width: 100px; animation: swim-left var(--swim-speed) linear infinite, float-up-down 3s ease-in-out infinite; }
         .f2 { top: 30%; width: 200px; animation: swim-right calc(var(--swim-speed) * 1.5) linear infinite; }
         .f3 { top: 15%; width: 150px; animation: swim-left calc(var(--swim-speed) * 0.6) linear infinite; }
@@ -123,18 +115,10 @@
         .f9 { top: 25%; width: 140px; animation: swim-left calc(var(--swim-speed) * 1.6) linear infinite, float-up-down 6s ease-in-out infinite; }
         .f10 { top: 90%; width: 80px; animation: swim-right calc(var(--swim-speed) * 0.8) linear infinite; }
 
-        /* Bong bóng */
         .bubble {
-            position: absolute; bottom: -20px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            animation: rise 5s infinite ease-in;
+            position: absolute; bottom: -20px; background: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: rise 5s infinite ease-in;
         }
-        @keyframes rise {
-            0% { bottom: -20px; transform: translateX(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { bottom: 100%; transform: translateX(-20px); opacity: 0; }
-        }
+        @keyframes rise { 0% { bottom: -20px; opacity: 0; } 50% { opacity: 1; } 100% { bottom: 100%; opacity: 0; } }
 
     </style>
 </head>
@@ -148,7 +132,7 @@
         <div class="control-group">
             <label>🎵 List nhạc:</label>
             <select id="musicSelect" onchange="playMusic(this.value)">
-                <option value="">-- Chọn nhạc để phát --</option>
+                <option value="">-- Chọn nhạc --</option>
                 <option value="wt0k2Dn_4oE">Anh vui - Phạm Kỳ</option>
                 <option value="98zHKN-xSHk">Blue - Yung Kai</option>
                 <option value="rpC1PohpbaQ">Cupid - Fifty Fifty</option>
@@ -157,10 +141,6 @@
                 <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng</option>
             </select>
             <button class="pause-btn" onclick="pauseMusic()">⏸️ Tạm dừng nhạc</button>
-            
-            <div style="font-size: 11px; color: #666; margin-top: 5px; font-style: italic;">
-                *Nhạc lấy trực tiếp từ YouTube
-            </div>
         </div>
 
         <div class="control-group">
@@ -194,9 +174,73 @@
     <div id="bubbles-container"></div>
 
     <script>
-        // --- 1. CẤU HÌNH YOUTUBE API ---
+        // 1. HÀM GIAO DIỆN (Chạy độc lập, không phụ thuộc YouTube)
+        function toggleMenu() {
+            var panel = document.getElementById('myPanel');
+            var btn = document.querySelector('.toggle-btn');
+            
+            // Thêm/Bỏ class hidden
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                btn.innerHTML = '👁️';
+            } else {
+                panel.classList.add('hidden');
+                btn.innerHTML = '🙈';
+            }
+        }
+
+        function changeBg(url) {
+            document.body.style.backgroundImage = "url('" + url + "')";
+        }
+
+        function changeSpeed(val) {
+            var speed = 32 - val; 
+            document.documentElement.style.setProperty('--swim-speed', speed + 's');
+        }
+
+        // Tạo bong bóng
+        var container = document.getElementById('bubbles-container');
+        for (var i = 0; i < 20; i++) {
+            var b = document.createElement('div');
+            b.className = 'bubble';
+            b.style.left = Math.random() * 100 + '%';
+            b.style.width = (Math.random() * 15 + 5) + 'px';
+            b.style.height = b.style.width;
+            b.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            b.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(b);
+        }
+
+        // 2. HÀM NHẠC YOUTUBE (Xử lý riêng)
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: '',
-                playerVars: {
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1 },
+                events: { 'onStateChange': onPlayerStateChange }
+            });
+        }
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) { player.playVideo(); }
+        }
+
+        function playMusic(videoId) {
+            if (player && videoId) { 
+                player.loadVideoById(videoId); 
+            }
+        }
+
+        function pauseMusic() {
+            if (player && typeof player.pauseVideo === 'function') {
+                player.pauseVideo();
+            }
+        }
+    </script>
+</body>
+</html>
