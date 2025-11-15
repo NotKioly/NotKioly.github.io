@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Hồ Cá - 6.1.1</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* Khung hồ cá */
+        .aquarium {
+            width: 800px;
+            height: 500px;
+            background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); /* Màu nước biển */
+            border: 10px solid #555;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden; /* Để cá bơi ra khỏi khung không bị lòi ra ngoài */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Mặt nước */
+        .water-surface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+
+        /* Cát đáy biển */
+        .sand {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: #edc9af;
+            z-index: 5;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        /* Định nghĩa con cá chung */
+        .fish {
+            position: absolute;
+            font-size: 50px; /* Kích thước cá */
+            user-select: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .fish:hover {
+            transform: scale(1.2); /* Phóng to khi di chuột vào */
+        }
+
+        /* Hiệu ứng bơi từ trái qua phải */
+        @keyframes swim-left-to-right {
+            from { left: -100px; }
+            to { left: 100%; }
+        }
+
+        /* Hiệu ứng bơi từ phải qua trái */
+        @keyframes swim-right-to-left {
+            from { right: -100px; }
+            to { right: 100%; }
+        }
+
+        /* Hiệu ứng bong bóng bay lên */
+        @keyframes bubble-rise {
+            0% { bottom: 0; opacity: 0; transform: translateX(0); }
+            50% { opacity: 1; }
+            100% { bottom: 100%; opacity: 0; transform: translateX(-20px); }
+        }
+
+        /* --- CÁC CON CÁ CỤ THỂ --- */
+        
+        /* Cá 1: Bơi nhanh, ở trên cao */
+        .fish-1 {
+            top: 100px;
+            animation: swim-left-to-right 10s linear infinite;
+        }
+
+        /* Cá 2: Bơi chậm, ở giữa, ngược chiều */
+        .fish-2 {
+            top: 250px;
+            transform: scaleX(-1); /* Lật ngược icon cá cho đúng hướng */
+            animation: swim-right-to-left 15s linear infinite;
+        }
+
+        /* Cá 3: Bơi rất chậm, sát đáy */
+        .fish-3 {
+            top: 380px;
+            font-size: 70px;
+            animation: swim-left-to-right 20s linear infinite;
+        }
+
+        /* Bong bóng */
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            bottom: 0;
+            animation: bubble-rise 4s ease-in infinite;
+            z-index: 4;
+        }
+
+        .b1 { width: 20px; height: 20px; left: 20%; animation-duration: 5s; }
+        .b2 { width: 10px; height: 10px; left: 50%; animation-duration: 7s; }
+        .b3 { width: 15px; height: 15px; left: 80%; animation-duration: 6s; }
+
+        h1 {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px #000;
+            z-index: 20;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="aquarium">
+        <h1>Hồ Cá Của A (Bài 6.1.1)</h1>
+        <div class="water-surface"></div>
+
+        <div class="fish fish-1">🐠</div>
+
+        <div class="fish fish-2">🐡</div>
+
+        <div class="fish fish-3">🐟</div>
+
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+
+        <div class="sand"></div>
+    </div>
+
+</body>
+</html>
