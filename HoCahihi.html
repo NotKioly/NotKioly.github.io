@@ -21,16 +21,53 @@
             transition: background-image 0.5s ease-in-out;
         }
 
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 200;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .toggle-btn:hover { background: #f0f0f0; transform: scale(1.1); }
+
         /* --- BẢNG ĐIỀU KHIỂN --- */
         .control-panel {
-            position: absolute; top: 20px; right: 20px;
+            position: absolute;
+            top: 20px;
+            right: 70px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 20px; border-radius: 15px;
+            padding: 20px;
+            border-radius: 15px;
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            z-index: 100; width: 280px; backdrop-filter: blur(5px);
+            z-index: 100;
+            width: 280px;
+            backdrop-filter: blur(5px);
+            
+            /* Hiệu ứng trượt */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s;
+            transform-origin: top right;
+        }
+
+        /* Class để ẩn menu */
+        .control-panel.hidden {
+            transform: translateX(400px) scale(0.8); /* Trượt ra ngoài và thu nhỏ */
+            opacity: 0;
+            pointer-events: none; /* Không bấm được khi ẩn */
         }
 
         .control-panel h3 { margin: 0 0 15px 0; color: #333; text-align: center; }
+        
         .control-group { margin-bottom: 15px; }
         .control-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
 
@@ -41,6 +78,20 @@
             border-radius: 5px; font-size: 11px;
         }
         .bg-btn:hover { background: #ddd; }
+
+        .pause-btn {
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .pause-btn:hover { background: #ff5252; }
 
         select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
         input[type="range"] { width: 100%; cursor: pointer; }
@@ -56,73 +107,21 @@
             display: block; 
         }
 
-        /* 1. Hiệu ứng bơi ngang (Di chuyển trái phải) */
-        @keyframes swim-left {
-            from { left: -300px; transform: scaleX(1); }
-            to { left: 110%; transform: scaleX(1); }
-        }
-        @keyframes swim-right {
-            from { right: -300px; transform: scaleX(-1); }
-            to { right: 110%; transform: scaleX(-1); }
-        }
+        @keyframes swim-left { from { left: -300px; transform: scaleX(1); } to { left: 110%; transform: scaleX(1); } }
+        @keyframes swim-right { from { right: -300px; transform: scaleX(-1); } to { right: 110%; transform: scaleX(-1); } }
+        @keyframes float-up-down { 0%, 100% { margin-top: 0; } 50% { margin-top: -40px; } }
 
-        /* 2. Hiệu ứng bơi lên xuống (Lượn sóng) */
-        @keyframes float-up-down {
-            0%, 100% { margin-top: 0; }
-            50% { margin-top: -40px; } /* Bơi lên 40px rồi xuống */
-        }
-
-        /* --- CẤU HÌNH TỪNG CON (Đã chỉnh size và tốc độ hợp lý) --- */
-        
-        .f1 { 
-            top: 10%; width: 100px; 
-            animation: swim-left var(--swim-speed) linear infinite, float-up-down 3s ease-in-out infinite; 
-        }
-        
-        .f2 { 
-            top: 30%; width: 200px; 
-            animation: swim-right calc(var(--swim-speed) * 1.5) linear infinite; /* Bơi chậm cho đầm */
-        }
-        
-        .f3 { 
-            top: 15%; width: 150px; 
-            animation: swim-left calc(var(--swim-speed) * 0.6) linear infinite; /* Rất nhanh */
-        }
-        
-        .f4 { 
-            top: 75%; width: 100px; 
-            animation: swim-right calc(var(--swim-speed) * 1.1) linear infinite, float-up-down 4s ease-in-out infinite; 
-        }
-        
-        .f5 { 
-            top: 60%; width: 80px; 
-            animation: swim-left calc(var(--swim-speed) * 2.0) linear infinite; 
-        }
-        
-        .f6 { 
-            top: 45%; width: 220px; 
-            animation: swim-right calc(var(--swim-speed) * 1.8) linear infinite; z-index: 1;
-        }
-        
-        .f7 { 
-            top: 55%; width: 110px; 
-            animation: swim-left calc(var(--swim-speed) * 1.3) linear infinite, float-up-down 5s ease-in-out infinite; 
-        }
-        
-        .f8 { 
-            top: 85%; width: 90px; 
-            animation: swim-right calc(var(--swim-speed) * 0.9) linear infinite; 
-        }
-        
-        .f9 { 
-            top: 25%; width: 140px; 
-            animation: swim-left calc(var(--swim-speed) * 1.6) linear infinite, float-up-down 6s ease-in-out infinite; 
-        }
-        
-        .f10 { 
-            top: 90%; width: 80px; 
-            animation: swim-right calc(var(--swim-speed) * 0.8) linear infinite; 
-        }
+        /* --- CẤU HÌNH TỪNG CON --- */
+        .f1 { top: 10%; width: 100px; animation: swim-left var(--swim-speed) linear infinite, float-up-down 3s ease-in-out infinite; }
+        .f2 { top: 30%; width: 200px; animation: swim-right calc(var(--swim-speed) * 1.5) linear infinite; }
+        .f3 { top: 15%; width: 150px; animation: swim-left calc(var(--swim-speed) * 0.6) linear infinite; }
+        .f4 { top: 75%; width: 100px; animation: swim-right calc(var(--swim-speed) * 1.1) linear infinite, float-up-down 4s ease-in-out infinite; }
+        .f5 { top: 60%; width: 80px; animation: swim-left calc(var(--swim-speed) * 2.0) linear infinite; }
+        .f6 { top: 45%; width: 220px; animation: swim-right calc(var(--swim-speed) * 1.8) linear infinite; z-index: 1; }
+        .f7 { top: 55%; width: 110px; animation: swim-left calc(var(--swim-speed) * 1.3) linear infinite, float-up-down 5s ease-in-out infinite; }
+        .f8 { top: 85%; width: 90px; animation: swim-right calc(var(--swim-speed) * 0.9) linear infinite; }
+        .f9 { top: 25%; width: 140px; animation: swim-left calc(var(--swim-speed) * 1.6) linear infinite, float-up-down 6s ease-in-out infinite; }
+        .f10 { top: 90%; width: 80px; animation: swim-right calc(var(--swim-speed) * 0.8) linear infinite; }
 
         /* Bong bóng */
         .bubble {
@@ -141,7 +140,9 @@
 </head>
 <body>
 
-    <div class="control-panel">
+    <button class="toggle-btn" onclick="toggleMenu()">👁️</button>
+
+    <div class="control-panel" id="myPanel">
         <h3>🐠 Hồ Cá Chill</h3>
 
         <div class="control-group">
@@ -153,8 +154,10 @@
                 <option value="rpC1PohpbaQ">Cupid - Fifty Fifty</option>
                 <option value="jPjQJYKhhk4">Phép màu - Nguyễn Hùng</option>
                 <option value="Ss56EcAp8JU">Tương tư - Clow</option>
-                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng em ti pi</option>
+                <option value="abPmZCZZrFA">Đừng làm trái tim anh đau - Sơn Tùng</option>
             </select>
+            <button class="pause-btn" onclick="pauseMusic()">⏸️ Tạm dừng nhạc</button>
+            
             <div style="font-size: 11px; color: #666; margin-top: 5px; font-style: italic;">
                 *Nhạc lấy trực tiếp từ YouTube
             </div>
@@ -196,50 +199,4 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: '',
-                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1 },
-                events: { 'onStateChange': onPlayerStateChange }
-            });
-        }
-
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                player.playVideo();
-            }
-        }
-
-        function playMusic(videoId) {
-            if (videoId) { player.loadVideoById(videoId); } else { player.stopVideo(); }
-        }
-
-        // --- 2. CÁC CHỨC NĂNG KHÁC ---
-        function changeBg(url) {
-            document.body.style.backgroundImage = `url('${url}')`;
-        }
-
-        function changeSpeed(val) {
-            let speed = 32 - val; 
-            document.documentElement.style.setProperty('--swim-speed', speed + 's');
-        }
-
-        function createBubbles() {
-            const container = document.getElementById('bubbles-container');
-            for (let i = 0; i < 20; i++) {
-                let b = document.createElement('div');
-                b.className = 'bubble';
-                b.style.left = Math.random() * 100 + '%';
-                b.style.width = Math.random() * 15 + 5 + 'px';
-                b.style.height = b.style.width;
-                b.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                b.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(b);
-            }
-        }
-        createBubbles();
-    </script>
-</body>
-</html>
+                playerVars: {
