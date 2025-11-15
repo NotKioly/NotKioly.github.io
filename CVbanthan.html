@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Cá Nhân - Nguyễn Văn A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CẤU TRÚC CƠ BẢN --- */
+        :root {
+            --primary-color: #2c3e50; /* Màu xanh đậm chủ đạo */
+            --secondary-color: #3498db; /* Màu xanh sáng điểm nhấn */
+            --text-color: #333;
+            --bg-color: #f4f7f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* --- CỘT TRÁI (THÔNG TIN CÁ NHÂN) --- */
+        .left-column {
+            width: 35%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .avatar-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.2);
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .left-column h1 { font-size: 24px; margin-bottom: 10px; }
+        .left-column p.job-title { color: var(--secondary-color); font-weight: bold; margin-bottom: 30px; }
+
+        .contact-info { text-align: left; margin-top: 30px; }
+        .contact-item { margin-bottom: 15px; display: flex; align-items: center; }
+        .contact-item i { width: 25px; color: var(--secondary-color); }
+        
+        .skills-section { text-align: left; margin-top: 40px; }
+        .skill-item { margin-bottom: 15px; }
+        .skill-name { font-size: 14px; margin-bottom: 5px; display: block; }
+        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .progress-fill { height: 100%; background: var(--secondary-color); border-radius: 4px; }
+
+        /* --- CỘT PHẢI (KINH NGHIỆM & HỌC VẤN) --- */
+        .right-column {
+            width: 65%;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 5px;
+        }
+
+        .timeline-date { color: #888; font-size: 14px; font-weight: bold; }
+        .timeline-title { font-size: 18px; font-weight: bold; color: var(--primary-color); margin: 5px 0; }
+        .timeline-company { font-style: italic; margin-bottom: 10px; display: block; }
+
+        /* --- RESPONSIVE (MOBILE) --- */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; margin: 0; width: 100%; }
+            .left-column, .right-column { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-column">
+            <div class="avatar-frame">
+                <img src="https://via.placeholder.com/150" alt="Avatar">
+            </div>
+            <h1>Nguyễn Văn A</h1>
+            <p class="job-title">Lập Trình Viên Web</p>
+
+            <div class="contact-info">
+                <div class="contact-item"><i class="fas fa-phone"></i> 0901 234 567</div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> email@vidu.com</div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> TP. Hồ Chí Minh</div>
+                <div class="contact-item"><i class="fas fa-globe"></i> www.portfolio.com</div>
+            </div>
+
+            <div class="skills-section">
+                <h3>KỸ NĂNG</h3>
+                <br>
+                <div class="skill-item">
+                    <span class="skill-name">HTML/CSS</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">JavaScript</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Tiếng Anh</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <h2 class="section-title">Giới thiệu</h2>
+            <p>Tôi là một lập trình viên đam mê công nghệ với 2 năm kinh nghiệm xây dựng website. Tôi yêu thích sự tối giản và luôn tìm kiếm các giải pháp tối ưu cho người dùng. Có khả năng làm việc độc lập và làm việc nhóm tốt.</p>
+            <br>
+
+            <h2 class="section-title">Kinh Nghiệm Làm Việc</h2>
+            
+            <div class="timeline-item">
+                <span class="timeline-date">2022 - Hiện tại</span>
+                <h3 class="timeline-title">Frontend Developer</h3>
+                <span class="timeline-company">Công ty Công Nghệ XYZ</span>
+                <p>- Thiết kế và lập trình giao diện website cho khách hàng.<br>- Tối ưu hóa tốc độ tải trang và trải nghiệm người dùng (UX).<br>- Phối hợp với team Backend để tích hợp API.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-date">2020 - 2022</span>
+                <h3 class="timeline-title">Thực tập sinh Web</h3>
+                <span class="timeline-company">Startup ABC</span>
+                <p>- Hỗ trợ fix lỗi giao diện.<br>- Tham gia xây dựng landing page quảng cáo.</p>
+            </div>
+
+            <h2 class="section-title">Học Vấn</h2>
+            <div class="timeline-item">
+                <span class="timeline-date">2016 - 2020</span>
+                <h3 class="timeline-title">Cử nhân CNTT</h3>
+                <span class="timeline-company">Đại học Bách Khoa</span>
+                <p>Tốt nghiệp loại Giỏi. Chuyên ngành Công nghệ phần mềm.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
