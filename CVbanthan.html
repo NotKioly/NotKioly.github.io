@@ -3,185 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Cá Nhân - Nguyễn Văn A</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>CV - Dương Đình Khôi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* --- CẤU TRÚC CƠ BẢN --- */
         :root {
-            --primary-color: #2c3e50; /* Màu xanh đậm chủ đạo */
-            --secondary-color: #3498db; /* Màu xanh sáng điểm nhấn */
+            --main-color: #2c3e50; 
+            --accent-color: #3498db;
             --text-color: #333;
-            --bg-color: #f4f7f6;
+            --bg-color: #f4f4f4;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background: var(--bg-color); margin: 0; color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 900px; margin: 30px auto; background: #fff; display: flex; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;}
         
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: white;
-            display: flex;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* --- CỘT TRÁI (THÔNG TIN CÁ NHÂN) --- */
-        .left-column {
-            width: 35%;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-        }
-
-        .avatar-frame {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.2);
-            margin: 0 auto 20px;
-            overflow: hidden;
-        }
-
-        .avatar-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .left-column h1 { font-size: 24px; margin-bottom: 10px; }
-        .left-column p.job-title { color: var(--secondary-color); font-weight: bold; margin-bottom: 30px; }
-
-        .contact-info { text-align: left; margin-top: 30px; }
-        .contact-item { margin-bottom: 15px; display: flex; align-items: center; }
-        .contact-item i { width: 25px; color: var(--secondary-color); }
+        /* Cột trái */
+        .left-side { background: var(--main-color); color: #fff; width: 35%; padding: 30px; text-align: center; }
+        .img-box { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 4px solid rgba(255,255,255,0.3); }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .name { font-size: 22px; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+        .role { font-size: 14px; font-weight: 300; margin-bottom: 30px; opacity: 0.8; color: var(--accent-color); }
         
-        .skills-section { text-align: left; margin-top: 40px; }
-        .skill-item { margin-bottom: 15px; }
-        .skill-name { font-size: 14px; margin-bottom: 5px; display: block; }
-        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; }
-        .progress-fill { height: 100%; background: var(--secondary-color); border-radius: 4px; }
+        .info-box { text-align: left; margin-bottom: 30px; }
+        .info-title { font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; font-weight: 500; color: var(--accent-color); }
+        .info-item { margin-bottom: 12px; font-size: 13px; display: flex; align-items: center; word-break: break-word;}
+        .info-item i { width: 25px; margin-right: 5px; color: var(--accent-color); }
+        
+        /* Cột phải */
+        .right-side { width: 65%; padding: 40px; }
+        .section { margin-bottom: 30px; }
+        .section-title { color: var(--main-color); font-size: 20px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; border-left: 4px solid var(--accent-color); padding-left: 15px; }
+        
+        .timeline-item { margin-bottom: 20px; }
+        .timeline-time { font-weight: bold; font-size: 14px; color: var(--accent-color); }
+        .timeline-header { font-size: 16px; font-weight: bold; color: #000; margin: 5px 0; }
+        .timeline-content { font-size: 14px; color: #555; text-align: justify; }
 
-        /* --- CỘT PHẢI (KINH NGHIỆM & HỌC VẤN) --- */
-        .right-column {
-            width: 65%;
-            padding: 40px;
-        }
-
-        .section-title {
-            font-size: 22px;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .timeline-item {
-            margin-bottom: 30px;
-            padding-left: 20px;
-            border-left: 2px solid #e0e0e0;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background: var(--secondary-color);
-            border-radius: 50%;
-            position: absolute;
-            left: -7px;
-            top: 5px;
-        }
-
-        .timeline-date { color: #888; font-size: 14px; font-weight: bold; }
-        .timeline-title { font-size: 18px; font-weight: bold; color: var(--primary-color); margin: 5px 0; }
-        .timeline-company { font-style: italic; margin-bottom: 10px; display: block; }
-
-        /* --- RESPONSIVE (MOBILE) --- */
+        /* Responsive */
         @media (max-width: 768px) {
             .container { flex-direction: column; margin: 0; width: 100%; }
-            .left-column, .right-column { width: 100%; }
+            .left-side, .right-side { width: 100%; padding: 20px; }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <div class="left-column">
-            <div class="avatar-frame">
-                <img src="https://via.placeholder.com/150" alt="Avatar">
+        <div class="left-side">
+            <div class="img-box">
+                <img src="https://via.placeholder.com/150" alt="Avatar Khôi">
             </div>
-            <h1>Nguyễn Văn A</h1>
-            <p class="job-title">Lập Trình Viên Web</p>
-
-            <div class="contact-info">
-                <div class="contact-item"><i class="fas fa-phone"></i> 0901 234 567</div>
-                <div class="contact-item"><i class="fas fa-envelope"></i> email@vidu.com</div>
-                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> TP. Hồ Chí Minh</div>
-                <div class="contact-item"><i class="fas fa-globe"></i> www.portfolio.com</div>
+            <h1 class="name">Dương Đình Khôi</h1>
+            <p class="role">Sinh viên năm 1 - HCMUE</p>
+            
+            <div class="info-box">
+                <div class="info-title">LIÊN HỆ</div>
+                <div class="info-item"><i class="fas fa-phone"></i> 0347 348 147</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> khoiphuochoa123@gmail.com</div>
+                <div class="info-item"><i class="fas fa-university"></i> ĐH Sư phạm TP.HCM</div>
             </div>
 
-            <div class="skills-section">
-                <h3>KỸ NĂNG</h3>
-                <br>
-                <div class="skill-item">
-                    <span class="skill-name">HTML/CSS</span>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-name">JavaScript</span>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-name">Tiếng Anh</span>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
-                </div>
+            <div class="info-box">
+                <div class="info-title">KỸ NĂNG</div>
+                <div class="info-item">✔ Tư duy sáng tạo</div>
+                <div class="info-item">✔ HTML/CSS Cơ bản</div>
+                <div class="info-item">✔ Làm việc nhóm</div>
+                <div class="info-item">✔ Tiếng Anh giao tiếp</div>
             </div>
         </div>
 
-        <div class="right-column">
-            <h2 class="section-title">Giới thiệu</h2>
-            <p>Tôi là một lập trình viên đam mê công nghệ với 2 năm kinh nghiệm xây dựng website. Tôi yêu thích sự tối giản và luôn tìm kiếm các giải pháp tối ưu cho người dùng. Có khả năng làm việc độc lập và làm việc nhóm tốt.</p>
-            <br>
-
-            <h2 class="section-title">Kinh Nghiệm Làm Việc</h2>
-            
-            <div class="timeline-item">
-                <span class="timeline-date">2022 - Hiện tại</span>
-                <h3 class="timeline-title">Frontend Developer</h3>
-                <span class="timeline-company">Công ty Công Nghệ XYZ</span>
-                <p>- Thiết kế và lập trình giao diện website cho khách hàng.<br>- Tối ưu hóa tốc độ tải trang và trải nghiệm người dùng (UX).<br>- Phối hợp với team Backend để tích hợp API.</p>
+        <div class="right-side">
+            <div class="section">
+                <h2 class="section-title">Mục Tiêu Nghề Nghiệp</h2>
+                <p class="timeline-content">
+                    Là sinh viên năng động của trường Đại học Sư phạm TP.HCM, tôi luôn nỗ lực trau dồi kiến thức chuyên môn và kỹ năng công nghệ. <br><br>
+                    <b>Ước mơ dài hạn:</b> Trở thành một nhân sự xuất sắc làm việc tại các <b>Studio thiết kế/công nghệ nổi tiếng</b>. Tôi mong muốn tạo ra những sản phẩm kỹ thuật số ấn tượng và có giá trị thực tiễn cao.
+                </p>
             </div>
 
-            <div class="timeline-item">
-                <span class="timeline-date">2020 - 2022</span>
-                <h3 class="timeline-title">Thực tập sinh Web</h3>
-                <span class="timeline-company">Startup ABC</span>
-                <p>- Hỗ trợ fix lỗi giao diện.<br>- Tham gia xây dựng landing page quảng cáo.</p>
+            <div class="section">
+                <h2 class="section-title">Học Vấn</h2>
+                <div class="timeline-item">
+                    <div class="timeline-time">2024 - Hiện tại</div>
+                    <div class="timeline-header">Đại học Sư phạm TP.HCM (HCMUE)</div>
+                    <div class="timeline-content">
+                        - Sinh viên năm Nhất.<br>
+                        - Đang rèn luyện kiến thức nền tảng và kỹ năng công nghệ.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">2021 - 2024</div>
+                    <div class="timeline-header">Trường THPT Phước Hòa</div>
+                    <div class="timeline-content">
+                        - Tốt nghiệp THPT.<br>
+                        - Tích cực tham gia các phong trào văn nghệ, sáng tạo của trường.
+                    </div>
+                </div>
             </div>
 
-            <h2 class="section-title">Học Vấn</h2>
-            <div class="timeline-item">
-                <span class="timeline-date">2016 - 2020</span>
-                <h3 class="timeline-title">Cử nhân CNTT</h3>
-                <span class="timeline-company">Đại học Bách Khoa</span>
-                <p>Tốt nghiệp loại Giỏi. Chuyên ngành Công nghệ phần mềm.</p>
+            <div class="section">
+                <h2 class="section-title">Hoạt Động & Đam Mê</h2>
+                <div class="timeline-item">
+                    <div class="timeline-header">Phát triển bản thân</div>
+                    <div class="timeline-content">
+                        - <b>Nhiếp ảnh & Thiết kế:</b> Thích chụp ảnh và tìm hiểu về bố cục, màu sắc (Chuẩn bị hành trang cho định hướng làm việc tại Studio).<br>
+                        - <b>Tự học:</b> Đang tự trau dồi thêm về Photoshop và Lập trình Web.<br>
+                        - <b>Tình nguyện:</b> Tham gia hỗ trợ các sự kiện của Khoa/Trường.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>
